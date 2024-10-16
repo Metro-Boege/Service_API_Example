@@ -12,7 +12,7 @@ namespace ServiceApiExample.Models
         //UserFields (Champs utilisateur)
         public List<CustomField?> CustomFields { get; set; } = [];
 
-        // CHaracteristics (Cotes)
+        // Characteristics (Cotes)
         public List<Characteristic?> Characteristics { get; set; } = [];
 
         // Mesure status (GO / NO GO)
@@ -27,10 +27,10 @@ namespace ServiceApiExample.Models
         // Mesure date
         public Date? Date { get; set; }
 
-        // PresetFrame
+        // Indicates if it's a preset frame (Indique si c'est une trame d'étalonnage)
         public bool? PresetFrame { get; set; }
 
-        // PresetControle
+        // Indicates if it's a preset controle frame (Indique si c'est une trame de contrôle d'étalonnage)
         public bool? PresetControlFrame { get; set; }
     }
 
@@ -96,7 +96,7 @@ namespace ServiceApiExample.Models
         // Preset enabled (Etalonnable)
         public bool? CalibrationEnable { get; set; }
 
-        //
+        // Preset controle enable (Controle d'étalonnage activé) 
         public bool? CalibrationControlEnable { get; set; }
     }
 }
