@@ -46,6 +46,7 @@ namespace ServiceApiExample
             }
         }
 
+        // When window is loading
         private void Main_Load(object sender, EventArgs e)
         {
             noData_panel.Location = main_grid.Location;
@@ -69,21 +70,24 @@ namespace ServiceApiExample
             }
         }
 
+        // When reset button is clicked
         private void reset_button_Click(object sender, EventArgs e)
         {
+            // Reset grid
             ResetGrid();
         }
 
+        // When window is closed
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // Stop listening and close listener
             Listener?.Stop();
             Listener?.Close();
         }
 
 
-
         /// <summary>
-        /// Set <see cref="ListenerCallback(IAsyncResult)"/> as data recpetion callback.
+        /// Set <see cref="ListenerCallback(IAsyncResult)"/> as data reception callback for the next request.
         /// </summary>
         private void Receive()
         {
@@ -101,7 +105,10 @@ namespace ServiceApiExample
         }
 
         /// <summary>
-        /// Get datas from requests and send back a response.
+        /// Call when request is received. Get datas from request and send back a response.
+        /// <para>
+        /// Since this callback is disposed after each request, it call <see cref="Receive"/> at the end to reset itself for the next request.
+        /// </para>
         /// </summary>
         /// <param name="result"></param>
         private void ListenerCallback(IAsyncResult result)
@@ -141,13 +148,7 @@ namespace ServiceApiExample
                             // Get device IP 
                             if (request.Url.Segments.Length > 4)
                             {
-                                string ip = request.Url.Segments[4];
-                            }
-
-                            // Get device port (argument optional generally it's 4001)
-                            if (request.Url.Segments.Length > 5)
-                            {
-                                string port = request.Url.Segments[5];
+                                string ip = request.Url.Segments[4].Replace('_', '.');
                             }
                         }
                     }
@@ -185,7 +186,10 @@ namespace ServiceApiExample
             finally
             {
                 // Set data reception callback
-                Receive();
+                if(Listener != null && Listener.IsListening)
+                {
+                    Receive();
+                }                
             }
         }
 
