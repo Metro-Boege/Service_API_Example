@@ -84,4 +84,5 @@ These lines activate API sending (you can add them if they don't already exist) 
 
 2. Part changing  
 
-    Service also notify when part configuration could have change (i.e. each time a device goes in mesure mode) and make a POST request on the Url corresponding to the `<PartChangeUrl>` tag. The request body is empty and device IP address is add at Url end for example the request Url `http://localhost:8080/part/change/192.168.1.112` indicates that configuration of the device with IP 192.168.1.112 may have been changed. Knowing that, you could for example connect directly on device IP, port 4001 and use gm4 protcole to get device configuration.  
+   Service also notify when part configuration could have change (i.e. each time a device goes in mesure mode) and make a POST request on the Url corresponding to the `<PartChangeUrl>` tag.  
+   The request body is empty and device IP address is add at Url end for example the request Url `http://localhost:8080/part/change/192.168.1.112` indicates that configuration of the device with IP 192.168.1.112 may have been changed. Knowing that, you could for example connect directly on device IP, port 4001 and use gm4 protcole to get device configuration.  
